@@ -1,5 +1,5 @@
-(defpackage #:example-docs/docs
-  (:nicknames #:example-docs)
+(defpackage #:site/docs
+  (:nicknames #:site)
   (:use #:cl)
   (:import-from #:mgl-pax
                 #:section
