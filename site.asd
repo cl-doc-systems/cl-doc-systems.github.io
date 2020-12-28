@@ -1,6 +1,6 @@
-(defsystem example-docs
+(defsystem "site"
   :build-operation build-docs-op
   :build-pathname "docs/build/"
   :class :package-inferred-system
   :pathname "docs/source/"
-  :depends-on ("example-docs/docs"))
+  :depends-on ("site/docs"))
