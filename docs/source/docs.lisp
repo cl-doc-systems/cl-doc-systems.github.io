@@ -4,9 +4,8 @@
   (:import-from #:mgl-pax
                 #:section
                 #:defsection)
-  (:export
-   #:build-docs))
-(in-package example-docs/docs)
+  (:export #:build-docs))
+(in-package site/docs)
 
 
 (defsection @index (:title "Common Lisp Documentation Builders")

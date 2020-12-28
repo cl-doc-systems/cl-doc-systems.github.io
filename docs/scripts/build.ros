@@ -159,4 +159,5 @@ behaviour could be overriden by keyword argument ``:raise t``."
                           (uiop:print-condition-backtrace condition :stream *error-output*)
                           (uiop:quit 1))))
     (build-docs)
-    (push-gh-pages)))
+    (unless (uiop:getenv "GITHUB_ACTIONS")
+      (push-gh-pages))))
