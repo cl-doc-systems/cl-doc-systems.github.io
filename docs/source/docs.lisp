@@ -1,12 +1,15 @@
-(defpackage #:site/docs
-  (:nicknames #:site)
+(defpackage #:site
   (:use #:cl)
+  (:import-from #:3bmd-definition-lists)
   (:import-from #:mgl-pax
                 #:section
                 #:defsection)
   (:export #:build-docs))
-(in-package site/docs)
+(in-package site)
 
+;; Markdown definition lists not work
+;; because of error:
+;; https://github.com/3b/3bmd/issues/43
 
 (defsection @index (:title "Common Lisp Documentation Builders")
   "
@@ -20,28 +23,97 @@ define a few packages, functions and classes.
 
 Here is a list of documentation builders along with their main strengths:
 
-* mgl-pax
-* coo
-* cldomain
-* geneva
+### cl-api
 
-test definition
-: The definition test
+- Really simple.
+- Readable color scheme.
+- No way to write free documentation chapters.
 
-second item
-: Nother definition test
+[Template](https://github.com/cl-doc-systems/cl-api), [demo](https://cl-doc-systems.github.io/cl-api/).
 
-"
-  )
+### cl-gendoc
+
+- You can write an extensions to support markups other than Markdown.
+- Links to HyperSpec from code snippets.
+
+[Template](https://github.com/cl-doc-systems/cl-gendoc), [demo](https://cl-doc-systems.github.io/cl-gendoc/).
+
+### codex
+
+- Supports different themes.
+- Custom markup format, but you can extend it with other markups.
+- Links to HyperSpec using special tag.
+
+
+[Template](https://github.com/cl-doc-systems/codex), [demo](https://cl-doc-systems.github.io/codex/).
+
+### coo
+
+- Uses reStructured text format.
+- New types of reST blocks can be written in Common Lisp.
+- Provides cross-reference helpers.
+
+[Template](https://github.com/cl-doc-systems/coo), [demo](https://cl-doc-systems.github.io/coo/).
+
+### eazy-documentation
+
+- Unique docstring parser which is works with custom forms.
+- Works with all markups supported by Pandoc.
+- Automatic discovery of documentation files.
+
+[Template](https://github.com/cl-doc-systems/eazy-documentation), [demo](https://cl-doc-systems.github.io/eazy-documentation/).
+
+### geneva
+
+- Custom markup format [mk2](https://inters.co/geneva/mk2.html).
+
+[Template](https://github.com/cl-doc-systems/geneva), [demo](https://cl-doc-systems.github.io/geneva/).
+
+### mgl-pax
+
+- Uses Markdown.
+- Provides convenient cross-reference helpers.
+- Has nice default scheme.
+- Is able to generate not only HTML, but also a markdown README file.
+- Nudge you too keep documentation as close to to the code as possible. You can define doc sections in the lisp files.
+
+[Template](https://github.com/cl-doc-systems/mgl-pax), [demo](https://cl-doc-systems.github.io/mgl-pax/).
+
+### sphinxcontrib-cldomain
+
+- Uses reStructured text format and external Sphinx builder.
+- Can use all extensions provided by Sphinx, like builtin search facitility.
+- Suitable for large multipart documents.
+- Provides cross-reference helpers.
+
+[Template](https://github.com/cl-doc-systems/sphinxcontrib-cldomain), [demo](https://cl-doc-systems.github.io/sphinxcontrib-cldomain/).
+
+### staple
+
+- You can reference symbol just by uppercasing.
+- Complex to setup.
+- Rendered documentation is nice.
+- Can be problems with package inferred systems.
+- No way to write free documentation chapters.
+- Links to the doc sources on the github.
+
+
+[Template](https://github.com/cl-doc-systems/staple), [demo](https://cl-doc-systems.github.io/staple/).
+
+
+")
 
 
 (defun build-docs ()
-  (mgl-pax:update-asdf-system-readmes @index :example)
+  (let ((3bmd-definition-lists:*definition-lists* t))
+    (mgl-pax:update-asdf-system-readmes @index :site)
   
-  (mgl-pax:update-asdf-system-html-docs
-   @index :example
-   :target-dir "docs/build/"
-   :pages `((:objects (,example-docs:@index)
-             :source-uri-fn ,(pax:make-github-source-uri-fn
-                              :example
-                              "https://github.com/cl-doc-systems/mgl-pax")))))
+    (let ((source-uri
+           (pax:make-github-source-uri-fn
+            :site
+            "https://github.com/cl-doc-systems/cl-doc-systems.github.io")))
+      (mgl-pax:update-asdf-system-html-docs
+       @index :site
+       :target-dir "docs/build/"
+       :pages `((:objects (,site::@index)
+                          :source-uri-fn ,source-uri))))))
