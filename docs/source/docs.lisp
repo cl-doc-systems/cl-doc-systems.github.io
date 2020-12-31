@@ -23,6 +23,16 @@ define a few packages, functions and classes.
 
 Here is a list of documentation builders along with their main strengths:
 
+### atdoc
+
+- Uses a custom markup language which allows to do a few interesting things.
+- There are special tags to help reference functions and classes.
+- It is able to extract arguments description and return value
+  into a separate section.
+- Builds not only HTML, but also a beautiful PDF and Info.
+
+[Template](https://github.com/cl-doc-systems/atdoc), [demo](https://cl-doc-systems.github.io/atdoc/), [demo PDF](https://cl-doc-systems.github.io/atdoc/latex/documentation.pdf).
+
 ### cl-api
 
 - Really simple.
