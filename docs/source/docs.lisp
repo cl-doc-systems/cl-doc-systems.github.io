@@ -65,6 +65,19 @@ Here is a list of documentation builders along with their main strengths:
 
 [Template](https://github.com/cl-doc-systems/coo), [demo](https://cl-doc-systems.github.io/coo/).
 
+### declt
+
+- Uses [Texinfo file format](https://www.gnu.org/software/texinfo/manual/texinfo/texinfo.html)
+  for intermediate document store.
+  This makes possible to generate not only `HTML`, but also `PDF` and other
+  output formats.
+- It can automatically include license text into the documentation. But
+  this works only for a number of popular licenses like `MIT`, `BSD`, `GPL`,
+  `LGPL` and `BOOST`.
+- Automatically builds comprehensive API documentation.
+
+[Template](https://github.com/cl-doc-systems/declt), [demo](https://cl-doc-systems.github.io/declt/).
+
 ### eazy-documentation
 
 - Unique docstring parser which is works with custom forms.
