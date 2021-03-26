@@ -92,6 +92,15 @@ Here is a list of documentation builders along with their main strengths:
 
 [Template](https://github.com/cl-doc-systems/geneva), [demo](https://cl-doc-systems.github.io/geneva/).
 
+### litterae
+
+- Uses README.md as a source.
+- Generated documentation looks really nice.
+- It autogenerates API reference.
+- No cross-referencing.
+
+[Template](https://github.com/cl-doc-systems/litterae), [demo](https://cl-doc-systems.github.io/litterae/).
+
 ### mgl-pax
 
 - Uses Markdown.
